@@ -316,10 +316,14 @@ void ledStateChange() {
 
 void eachTick() {
 	ticks++;
-	if (ticks % 10 == 0) {
-	//if (ticks % (value_adc / 205) == 0) {
-		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-	}
+	if (ledState) {
+    if (ticks % 10 == 0) {
+    //if (ticks % (value_adc / 205) == 0) {
+      HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+    }
+  } else {
+    HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
+  }
 }
 
 /* USER CODE END 4 */
